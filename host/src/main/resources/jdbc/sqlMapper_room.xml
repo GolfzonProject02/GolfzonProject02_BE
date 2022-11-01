@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="worktalk.com.host.repository.RoomDAOimpl">
+
+	<insert id="SQL_INSERT_ROOM"
+		parameterType="worktalk.com.host.domain.Room">
+		INSERT INTO room
+		(room_num,space_num,room_type,room_name,room_price,work_start,work_end,room_img,room_detail)
+		VALUES(seq_room.nextval,#{space_num},#{room_type},#{room_name},#{room_price},#{work_start},#{work_end},#{room_img},#{room_detail})
+	</insert>
+
+	
+</mapper>

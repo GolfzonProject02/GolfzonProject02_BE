@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="worktalk.com.host.repository.SpaceDAOimpl">
+
+	<insert id="SQL_INSERT_SPACE"
+		parameterType="worktalk.com.host.domain.Space">
+		INSERT INTO space
+		(space_num,host,space_name,space_detail,postcode,address,detail_address,reg_code,space_type,space_status,space_img)
+		VALUES(seq_space.nextval,#{host},#{space_name},#{space_detail},#{postcode},#{address},#{detail_address},#{reg_code},#{space_type},'waiting for inspection',#{space_img})
+	</insert>
+
+	<update id="SQL_UPDATE_SPACE" parameterType="worktalk.com.host.domain.Space">
+		UPDATE space SET
+		<if test="space_name != null">
+		space_name=#{space_name} 
+		</if>
+		<if test="space_detail != null">
+		space_detail=#{space_detail} 
+		</if>
+		<if test="space_img != null">
+		space_img=#{space_img} 
+		</if>
+		WHERE space_num=#{space_num}
+	</update>
+
+	<delete id="SQL_DELETE_SPACE" parameterType="worktalk.com.host.domain.Space">
+		DELETE FROM space WHERE
+		cc_num=#{cc_num}
+	</delete>
+
+	<select id="SQL_SELECT_ONE_SPACE" resultType="worktalk.com.host.domain.Space"
+		parameterType="worktalk.com.host.domain.Space">
+		SELECT * FROM space WHERE space_num = #{space_num}
+		</select>
+
+	<select id="SQL_SELECT_ALL_SPACE" resultType="worktalk.com.host.domain.Space"
+		parameterType="worktalk.com.host.domain.Space">
+		SELECT * FROM space ORDER BY space_num DESC
+	</select>
+
+	<select id="SQL_SEARCH_LIST_SPACE" resultType="worktalk.com.host.domain.Space"
+		parameterType="hashmap">
+		select * from space
+		<if test="searchKey == 'title'">
+			where title like #{searchWord} order by cc_num desc
+		</if>
+		<if test="searchKey == 'content'">
+			where content like #{searchWord} order by cc_num desc
+		</if>
+
+	</select>
+</mapper>

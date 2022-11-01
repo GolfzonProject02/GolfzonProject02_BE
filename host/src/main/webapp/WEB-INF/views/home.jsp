@@ -9,6 +9,7 @@
 	Hello world!  
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<a href="/host/backoffice/space_insert.do">space_insert.do</a>
+
 </body>
 </html>

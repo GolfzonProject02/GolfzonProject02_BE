@@ -29,7 +29,10 @@
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds"></property>
 		<property name="mapperLocations">
-			<list></list>
+			<list>
+			<value>classpath:jdbc/sqlMapper_space.xml</value>
+			<value>classpath:jdbc/sqlMapper_room.xml</value>
+			</list>
 		</property>
 	</bean>
 
