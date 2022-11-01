@@ -1,7 +1,5 @@
 package worktalk.com.user.service;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +15,6 @@ public class UserProfileServiceimpl implements UserProfileService {
 	
 	@Autowired
 	UserDAO dao;
-	@Autowired
-	HttpSession session;
 	
 	public UserProfileServiceimpl() {
 		logger.info("ProfileServiceimpl()....");
@@ -57,7 +53,6 @@ public class UserProfileServiceimpl implements UserProfileService {
 		logger.info("findByName()....");
 		logger.info("{}", user);
 		
-		session.getAttribute("user_email");
 		return dao.findByName(user);
 	}
 
