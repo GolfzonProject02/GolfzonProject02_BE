@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import worktalk.com.host.domain.Host;
 import worktalk.com.host.repository.HostDAO;
-import worktalk.com.host.service.HostLoginService;
+import worktalk.com.host.service.LoginService;
 import worktalk.com.host.service.MailSenderService;
 
 /**
@@ -25,7 +25,7 @@ public class LogInController {
 	private static final Logger logger = LoggerFactory.getLogger(LogInController.class);
 	
 	@Autowired
-	HostLoginService loginService;
+	LoginService loginService;
 	@Autowired
 	MailSenderService mailSender;
 	@Autowired
@@ -49,11 +49,14 @@ public class LogInController {
 	 * if fails => redirecting to login page
 	 */
 	
-	@RequestMapping(value = "/loginOK.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginOK.do", method = RequestMethod.GET)
 	public String loginOK(Host host, HttpServletRequest request) {
 		logger.info("Welcome loginOK.do!");
 		
 		logger.info("host: {}", host);
+		
+		host.setEmail("host");
+		host.setPw("1234");
 		
 		Host host1 = loginService.login(host);
 		
@@ -66,7 +69,7 @@ public class LogInController {
 				session.setAttribute("host_name", host1.getName());
 				logger.info("host_name: {}", session.getAttribute("host_name"));
 				if (request.getHeader("Refer") == null) {
-					return "redirect:";
+					return "redirect:/";
 				} else {
 					return "redirect:" + request.getHeader("Referer");
 				}
@@ -90,7 +93,7 @@ public class LogInController {
 		logger.info("host_name: {}", session.getAttribute("host_name"));
 		// Adding "redirect:" + request.getHeader("Referer") on progress....
 		// Adding Interceptor is on progress....
-		return "redirect:";
+		return "redirect:/";
 	}
 	
 }

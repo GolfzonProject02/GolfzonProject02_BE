@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import worktalk.com.host.domain.Host;
 import worktalk.com.host.repository.HostDAO;
-import worktalk.com.host.service.HostJoinService;
+import worktalk.com.host.service.JoinService;
 import worktalk.com.host.service.MailSenderService;
 
 /**
@@ -23,7 +23,7 @@ public class JoinController {
 	private static final Logger logger = LoggerFactory.getLogger(JoinController.class);
 	
 	@Autowired
-	HostJoinService service;
+	JoinService service;
 	@Autowired
 	MailSenderService mailSender;
 	@Autowired

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import worktalk.com.user.domain.User;
 import worktalk.com.user.repository.UserDAO;
 import worktalk.com.user.service.MailSenderService;
-import worktalk.com.user.service.UserLoginService;
+import worktalk.com.user.service.LoginService;
 
 /**
  * author: Juhee Fred Lee (이주희)
@@ -25,7 +25,7 @@ public class LogInController {
 	private static final Logger logger = LoggerFactory.getLogger(LogInController.class);
 	
 	@Autowired
-	UserLoginService loginService;
+	LoginService loginService;
 	@Autowired
 	MailSenderService mailSender;
 	@Autowired

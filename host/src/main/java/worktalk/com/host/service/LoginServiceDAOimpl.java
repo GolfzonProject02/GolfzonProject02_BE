@@ -9,14 +9,14 @@ import worktalk.com.host.domain.Host;
 import worktalk.com.host.repository.HostLoginDAO;
 
 @Service
-public class HostLoginServiceDAOimpl implements HostLoginService{
+public class LoginServiceDAOimpl implements LoginService{
 	
-	private static final Logger logger = LoggerFactory.getLogger(HostLoginServiceDAOimpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(LoginServiceDAOimpl.class);
 	
 	@Autowired
 	HostLoginDAO loginDao;
 	
-	public HostLoginServiceDAOimpl() {
+	public LoginServiceDAOimpl() {
 		logger.info("UserLogInServiceDAOimpl()....");
 	}
 
