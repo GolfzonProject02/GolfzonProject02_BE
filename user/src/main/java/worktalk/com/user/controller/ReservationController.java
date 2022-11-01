@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -75,12 +76,14 @@ public class ReservationController {
 	 * request for user specific reservation page
 	 */
 	@RequestMapping(value = {"reservation/findByNum.do"}, method = RequestMethod.GET)
-	public String findByNum(Reservation reservation) {
+	public String findByNum(Reservation reservation, Model model) {
 		logger.info("Welcome findByNum.do!");
 		logger.info("{}", reservation);
 		
 		Reservation result = reserveServiceDAO.findReservationByNum(reservation);
 		logger.info("result: {}", result);
+		
+		model.addAttribute("reservation", result);
 		return "home";
 	}
 	

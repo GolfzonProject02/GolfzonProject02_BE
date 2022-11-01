@@ -58,10 +58,10 @@ public class UserReservationController {
 		reservation.setName((String)session.getAttribute("user_name"));
 		logger.info("name: {}", reservation.getName());
 		
-		reservation.setName("사용");
+		reservation.setName("사용자");
 		logger.info("name: {}", reservation.getName());
 		
-		List<Reservation> list = myReserveServiceDAO.findReservationByName(reservation);
+		List<Reservation> list = myReserveServiceDAO.findReservationByStatus(reservation);
 		logger.info("list: {}", list);
 		return "home";
 	}

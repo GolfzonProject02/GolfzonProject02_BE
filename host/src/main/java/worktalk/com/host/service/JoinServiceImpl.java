@@ -1,27 +1,27 @@
-package worktalk.com.user.service;
+package worktalk.com.host.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import worktalk.com.user.domain.User;
-import worktalk.com.user.repository.UserDAO;
+import worktalk.com.host.domain.Host;
+import worktalk.com.host.repository.HostDAO;
 
 /**
  * 
  * @author Juhee Fred Lee
- * Service class for user data CRUD
+ * Service class for host data CRUD
  *
  */
 @Service
-public class UserJoinServiceImpl implements UserJoinService {
-	private static final Logger logger = LoggerFactory.getLogger(UserJoinServiceImpl.class);
+public class JoinServiceImpl implements JoinService {
+	private static final Logger logger = LoggerFactory.getLogger(JoinServiceImpl.class);
 
 	@Autowired
-	UserDAO dao;
+	HostDAO dao;
 	
-	public UserJoinServiceImpl() {
+	public JoinServiceImpl() {
 		logger.info("JoinServiceImpl()....");
 	}
 	
@@ -30,10 +30,10 @@ public class UserJoinServiceImpl implements UserJoinService {
 	 * return dao.join
 	 */
 	@Override
-	public int join(User user) {
+	public int join(Host host) {
 		logger.info("join()....");
-		logger.info("{}", user);
-		return dao.join(user);
+		logger.info("{}", host);
+		return dao.join(host);
 	}
 
 	/*
@@ -41,10 +41,10 @@ public class UserJoinServiceImpl implements UserJoinService {
 	 * Returns dao.checkDuplicateName
 	 */
 	@Override
-	public int checkDuplicatedName(User user) {
+	public int checkDuplicatedName(Host host) {
 		logger.info("checkDuplicatedName()....");
-		logger.info("{}", user);
-		return dao.checkDuplicatedName(user);
+		logger.info("{}", host);
+		return dao.checkDuplicatedName(host);
 	}
 
 }

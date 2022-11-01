@@ -24,7 +24,7 @@
 	</select>
 	
 	<select id="SQL_FIND_RESERVATION_BY_STATUS" parameterType="worktalk.com.user.domain.Reservation" resultType="worktalk.com.user.domain.Reservation">
-		SELECT * FROM RESERVATION WHERE NAME=#{name} AND STATUS=#{status} AND P_STATUS = #{p_status}
+		SELECT * FROM RESERVATION WHERE NAME=#{name} AND STATUS=#{status}
 	</select>
 
 </mapper>

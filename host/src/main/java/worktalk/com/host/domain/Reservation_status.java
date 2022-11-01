@@ -1,4 +1,4 @@
-package worktalk.com.user.domain;
+package worktalk.com.host.domain;
 
 public enum Reservation_status {
 	

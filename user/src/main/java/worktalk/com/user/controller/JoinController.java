@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import worktalk.com.user.domain.User;
 import worktalk.com.user.repository.UserDAO;
 import worktalk.com.user.service.MailSenderService;
-import worktalk.com.user.service.UserJoinService;
+import worktalk.com.user.service.JoinService;
 
 /**
  * author: Juhee Fred Lee (이주희)
@@ -23,7 +23,7 @@ public class JoinController {
 	private static final Logger logger = LoggerFactory.getLogger(JoinController.class);
 	
 	@Autowired
-	UserJoinService service;
+	JoinService service;
 	@Autowired
 	MailSenderService mailSender;
 	@Autowired
