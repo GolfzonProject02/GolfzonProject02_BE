@@ -1,4 +1,4 @@
-package worktalk.com.master;
+package worktalk.com.master.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
