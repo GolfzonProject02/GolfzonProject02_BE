@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="worktalk.com.user.domain.Reservation">
+	<insert id="SQL_RESERVE" parameterType="worktalk.com.user.domain.Reservation">
+		INSERT INTO RESERVATION(R_NUM, NAME, ROOM_NUM, R_START, R_END, STATUS, P_STATUS, R_DATE, AMOUNT) VALUES(SEQ_RESERVATION.NEXTVAL, #{name}, #{room_num}, #{r_start}, #{r_end},#{status},#{p_status},sysdate, #{amount})
+	</insert>
+	
+	<update id="SQL_CANCEL" parameterType="worktalk.com.user.domain.Reservation">
+		UPDATE RESERVATION SET STATUS = #{status}, CANCEL_REASON = #{cancel_reason} WHERE R_NUM=#{r_num}
+	</update>
+	
+	<select id="SQL_IS_BOOKED" parameterType="worktalk.com.user.domain.Reservation" resultType="worktalk.com.user.domain.Reservation">
+		SELECT R_NUM, NAME, ROOM_NUM, to_char(R_START, 'yyyy-MM-dd HH:mm:ss') R_START, to_char(R_END, 'yyyy-MM-dd HH:mm:ss') R_END, STATUS, P_STATUS, to_char(R_DATE, 'yyyy-MM-dd HH:mm:ss') R_DATE FROM RESERVATION WHERE ROOM_NUM = #{room_num} AND (STATUS='Waiting' OR STATUS='Approved')
+	</select>
+	
+	<select id="SQL_FIND_RESERVATION_BY_NUM" parameterType="worktalk.com.user.domain.Reservation" resultType="worktalk.com.user.domain.Reservation">
+		SELECT * FROM RESERVATION WHERE R_NUM=#{r_num}
+	</select>
+	
+	<select id="SQL_FIND_RESERVATION_BY_NAME" parameterType="worktalk.com.user.domain.Reservation" resultType="worktalk.com.user.domain.Reservation">
+		SELECT * FROM RESERVATION WHERE NAME=#{name} ORDER BY R_NUM DESC
+	</select>
+	
+	<select id="SQL_FIND_RESERVATION_BY_STATUS" parameterType="worktalk.com.user.domain.Reservation" resultType="worktalk.com.user.domain.Reservation">
+		SELECT * FROM RESERVATION WHERE NAME=#{name} AND STATUS=#{status} AND P_STATUS = #{p_status}
+	</select>
+
+</mapper>
