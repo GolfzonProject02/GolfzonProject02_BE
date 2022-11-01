@@ -6,17 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import worktalk.com.host.domain.Space;
-import worktalk.com.host.repository.SpaceMultipartFAO;
+import worktalk.com.host.repository.SpaceFAO;
 
 @Service
-public class SpaceServiceMultipart {
-	private static final Logger logger = LoggerFactory.getLogger(SpaceServiceMultipart.class);
+public class SpaceMultipartService {
+	private static final Logger logger = LoggerFactory.getLogger(SpaceMultipartService.class);
 	
 	@Autowired
-	SpaceMultipartFAO fao;
+	SpaceFAO fao;
 	
-	public SpaceServiceMultipart() {
-		logger.info("SpaceServiceMultipart()...");
+	public SpaceMultipartService() {
+		logger.info("SpaceMultipartService()...");
 	}
 
 	public Space getVO(Space space) {

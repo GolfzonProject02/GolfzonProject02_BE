@@ -30,9 +30,11 @@ public class SpaceDAOimpl implements SpaceDAO {
 	}
 
 	@Override
-	public int update(String key, Space space) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(Space space) {
+		logger.info("insert()....");
+		logger.info("{}", space);
+		int flag = sqlSession.update("SQL_UPDATE_SPACE", space);
+		return flag;
 	}
 
 	@Override

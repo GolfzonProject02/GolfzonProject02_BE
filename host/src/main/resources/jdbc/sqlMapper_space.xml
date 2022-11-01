@@ -13,8 +13,15 @@
 
 	<update id="SQL_UPDATE_SPACE" parameterType="worktalk.com.host.domain.Space">
 		UPDATE space SET
-		<if test="Key == 'title'">
-		title=#{title} </if>
+		<if test="space_name != null">
+		space_name=#{space_name} 
+		</if>
+		<if test="space_detail != null">
+		space_detail=#{space_detail} 
+		</if>
+		<if test="space_img != null">
+		space_img=#{space_img} 
+		</if>
 		WHERE space_num=#{space_num}
 	</update>
 

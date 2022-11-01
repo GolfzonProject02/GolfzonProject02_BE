@@ -6,7 +6,7 @@ import worktalk.com.host.domain.Space;
 
 public interface SpaceDAO {
 	public int insert(Space space);
-	public int update(String key, Space space);
+	public int update(Space space);
 	public int delete(Space space);
 	public Space selectOne(Space space);
 	public List<Space> selectAll();

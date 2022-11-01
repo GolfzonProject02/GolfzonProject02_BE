@@ -26,6 +26,16 @@ public class SpaceService {
 		return dao.insert(space);
 	}
 	
+	public int update(Space space) {
+		logger.info("update()...");
+		return dao.update(space);
+	}
+	
+	public int delete(Space space) {
+		logger.info("delete()...");
+		return dao.delete(space);
+	}
+	
 	public List<Space> selectAll() {
 		logger.info("selectAll()...");
 		return dao.selectAll();

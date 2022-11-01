@@ -8,9 +8,7 @@
 </head>
 <body>
 	<h1>selectOne.jsp</h1>
-	
-					<a href="update?num=${param.num}">회원수정</a>
-					<a href="delete?num=${param.num}">회원삭제</a>
+	<a href="/host/backoffice/space_update.do?space_num=${space.space_num}">수정</a>
 
 
 	 <div id="selectOne">
