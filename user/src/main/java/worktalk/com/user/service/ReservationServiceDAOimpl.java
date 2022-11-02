@@ -32,6 +32,9 @@ public class ReservationServiceDAOimpl implements ReservationServiceDAO {
 		logger.info("reserve()....");
 		logger.info("{}", reservation);
 		
+		reservation.setStatus(Reservation_status.Booked.toString());
+		
+		// creating dummy data for timestamp data
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 		
 		String ts = sdf.format(System.currentTimeMillis());
@@ -41,6 +44,7 @@ public class ReservationServiceDAOimpl implements ReservationServiceDAO {
 		reservation.setR_start(ts);
 		reservation.setR_end(ts);
 		reservation.setR_date(ts);
+		// creating dummy data for timestamp data
 		
 		return dao.reserve(reservation);
 	}
