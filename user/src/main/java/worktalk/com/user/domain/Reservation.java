@@ -18,7 +18,7 @@ public class Reservation implements Serializable{
 	private String r_end; // room check out hour (yyyy-hh-mm hh:mm:ss)
 	private int amount; // amount of cost for using the facilities
 	private String status; // whether room reservation is confirmed by host => Enum Reservation_status
-	private int p_status; // whether the reservation is paid or not => Enum Payment_status
+	private int p_status; // whether the reservation is paid or not => 0 for not paid, 1 for paid
 	private String r_date; // when the user applied for room reservation
 	private String cancel_reason; // reason why host or user canceled the reservation
 	

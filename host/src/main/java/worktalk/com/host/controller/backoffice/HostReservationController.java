@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import worktalk.com.host.domain.Reservation;
 import worktalk.com.host.domain.Reservation_status;
-import worktalk.com.host.repository.ReservationDAO;
 import worktalk.com.host.service.ReservationService;
 
 /**
@@ -69,32 +68,6 @@ public class HostReservationController {
 		return reservation_list_status;
 	}
 	
-	@RequestMapping(value = "/backoffice/reservation/approve.do", method = RequestMethod.GET)
-	@ResponseBody
-	public Reservation approve(Reservation reservation) {
-		logger.info("Welcome approve!");
-		
-		reservation.setStatus(Reservation_status.Approved.toString());
-		Reservation approve_result = service.updateStatus(reservation);
-		logger.info("{}", approve_result);
-		
-		return approve_result;
-	}
-	
-	
-	@RequestMapping(value = "/backoffice/reservation/decline.do", method = RequestMethod.GET)
-	@ResponseBody
-	public Reservation decline(Reservation reservation) {
-		logger.info("Welcome decline!");
-		
-		reservation.setStatus(Reservation_status.Declined.toString());
-		Reservation decline_result = service.updateStatus(reservation);
-		logger.info("{}", decline_result);
-		
-		return decline_result;
-	}
-	
-	
 	@RequestMapping(value = "/backoffice/reservation/end.do", method = RequestMethod.GET)
 	@ResponseBody
 	public Reservation end(Reservation reservation) {
@@ -109,10 +82,11 @@ public class HostReservationController {
 	}
 	
 	
-	@RequestMapping(value = "/backoffice/reservation/cancel.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/backoffice/reservation/cancel.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Reservation cancel(Reservation reservation) {
 		logger.info("Welcome cancel!");
+		logger.info("{}", reservation);
 		
 		Reservation cancel_result = service.cancel(reservation);
 		logger.info("{}", cancel_result);

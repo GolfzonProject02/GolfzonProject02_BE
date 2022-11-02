@@ -31,10 +31,8 @@ public class ReservationServiceimpl implements ReservationService {
 
 	@Override
 	public Reservation updateStatus(Reservation reservation) {
-		logger.info("approve()....");
+		logger.info("updateStatus()....");
 		logger.info("{}", reservation);
-
-		reservation.setStatus(Reservation_status.Approved.toString());
 
 		int flag = dao.updateStatus(reservation);
 		logger.info("flag: {}", flag);
@@ -48,6 +46,8 @@ public class ReservationServiceimpl implements ReservationService {
 
 	@Override
 	public Reservation cancel(Reservation reservation) {
+		logger.info("cancel()....");
+		logger.info("{}", reservation);
 		
 		reservation.setStatus(Reservation_status.Canceled_by_host.toString());
 		
