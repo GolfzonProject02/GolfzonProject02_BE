@@ -41,8 +41,13 @@ public class SpaceService {
 		return dao.selectAll();
 	}
 	
-	public Space selectOne(Space space) {
+	public Space selectOne(long space_num) {
 		logger.info("selectOne()...");
-		return dao.selectOne(space);
+		return dao.selectOne(space_num);
+	}
+	
+	public List<Space> searchList(String searchWord) {
+		logger.info("searchList()...");
+		return dao.searchList(searchWord);
 	}
 }

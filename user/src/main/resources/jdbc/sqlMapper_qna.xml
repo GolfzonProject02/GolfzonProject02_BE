@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="worktalk.com.user.repository.Qnaimpl">
+
+	<insert id="SQL_INSERT_QNA"
+		parameterType="worktalk.com.user.domain.Qna">
+		INSERT INTO qna
+		(q_num,space_num,writer,type,content,q_date)
+		VALUES(seq_qna.nextval,#{space_num},#{writer},#{type},#{content},TO_CHAR(localtimestamp,'yyyy-mm-dd HH:mm'))
+	</insert>
+
+	<update id="SQL_UPDATE_QNA" parameterType="worktalk.com.user.domain.Qna">
+		UPDATE qna SET
+		content=#{content}, q_date=#{TO_CHAR(localtimestamp,'yyyy-mm-dd HH:mm')} WHERE
+		q_num=#{q_num}
+	</update>
+
+	<delete id="SQL_DELETE_QNA" parameterType="worktalk.com.user.domain.Qna">
+		DELETE FROM qna WHERE
+		q_num=#{q_num}
+	</delete>
+
+	<select id="SQL_SELECT_ALL_QNA" resultType="worktalk.com.user.domain.Qna"
+		parameterType="worktalk.com.user.domain.Qna">
+		SELECT * FROM qna WHERE space_num = #{space_num}
+		ORDER BY cc_num DESC
+	</select>
+
+	<select id="SQL_SEARCH_LIST_QNA" resultType="worktalk.com.user.domain.Qna"
+		parameterType="hashmap">
+		SELECT * FROM qna
+		<if test="searchKey == 'title'">
+			WHERE title LIKE #{searchWord} ORDER BY cc_num DESC
+		</if>
+		<if test="searchKey == 'content'">
+			WHERE content LIKE #{searchWord} ORDER BY cc_num DESC
+		</if>
+
+	</select>
+</mapper>

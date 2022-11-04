@@ -31,6 +31,7 @@ public class MypageController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	//1대1문의 페이지
 	@RequestMapping(value = "/mypage/customercenter.do", method = RequestMethod.GET)
 	public String selectAll(Model model) {
 		logger.info("Welcome selectAll");
@@ -39,11 +40,11 @@ public class MypageController {
 		logger.info("cc_boardlist.size() : {}",cc_boardlist.size());
 		
 		model.addAttribute("cc_boardlist",cc_boardlist);
-		
 
-		return "mypage/selectAll";
+		return "customerCenter/customerCenter";
 	}
 	
+	//문의 작성
 	@RequestMapping(value = "/mypage/customercenter_insert.do", method = RequestMethod.POST)
 	public String insert(Customer_center customer_center) {
 		logger.info("Welcome insertOK...");
@@ -56,10 +57,11 @@ public class MypageController {
 		if (result == 1) {
 			return "redirect:customercenter.do";
 		} else {
-			return "redirect:customercenter.do";
+			return "redirect:customercenter_insert.do";
 		}
 	}
 	
+	//문의 수정
 	@RequestMapping(value = "/mypage/customercenter_update.do", method = RequestMethod.POST)
 	public String update(Customer_center customer_center) {
 		logger.info("Welcome updateOK");
@@ -72,19 +74,21 @@ public class MypageController {
 		if (result == 1) {
 			return "redirect:customercenter.do";
 		} else {
-			return "redirect:customercenter.do";
+			return "customercenter_update.do";
 		}
 
 	}
+	
+	//문의 삭제
 	@RequestMapping(value = "/mypage/customercenter_delete.do", method = RequestMethod.GET)
 	public String delete(Customer_center customer_center) {
 		logger.info("Welcome deleteOK");
-
 		int result = service.delete(customer_center);
 		logger.info("result : {}", result);
 
 		return "redirect:customercenter.do";
 	}
+	
 	@RequestMapping(value = "/mypage/customercenter_searchList.do", method = RequestMethod.GET)
 	public String searchList(Model model, String searchKey, String searchWord) {
 		logger.info("Welcome searchList");
@@ -94,7 +98,9 @@ public class MypageController {
 		List<Customer_center> cc_boardlist = service.searchList(searchKey, searchWord);
 		logger.info("result() : {}", cc_boardlist.size());
 		model.addAttribute("cc_boardlist", cc_boardlist);
-		return "mypage/selectAll";
+		
+		return "customerCenter/customerCenter";
+//		return "mypage/selectAll";
 	}
 
 	

@@ -48,6 +48,7 @@ public class Customer_centerDAOimpl implements Customer_centerDAO {
 		logger.info("{}", customer_center);
 
 		int flag = sqlSession.delete("SQL_DELETE_CC", customer_center);
+		logger.info("{}",flag);
 
 		return flag;
 	}
