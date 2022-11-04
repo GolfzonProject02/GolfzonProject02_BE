@@ -13,7 +13,7 @@
 
 	<update id="SQL_UPDATE_CC" parameterType="worktalk.com.user.domain.Customer_center">
 		UPDATE customer_center SET
-		title=#{title},content=#{content},type=#{type},imgname=#{imgname},cc_date=#{cc_date} WHERE
+		title=#{title},content=#{content},type=#{type},imgname=#{imgname},cc_date=localtimestamp WHERE
 		cc_num=#{cc_num}
 	</update>
 

@@ -1,6 +1,7 @@
 package worktalk.com.host.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,10 +21,17 @@ public class RoomService {
 	public RoomService() {
 		logger.info("RoomService()...");
 	}
-	
-	public int insert(Room room) {
+//	public int insert(Map<String, Object> map) {
+//		logger.info("insert()...");
+//		return dao.insert(map);
+//	}
+//	public int insert(Map<String, Object> map) {
+//		logger.info("insert()...");
+//		return dao.insert(map);
+//	}
+	public int insert(Room vo) {
 		logger.info("insert()...");
-		return dao.insert(room);
+		return dao.insert(vo);
 	}
 	
 	public int update(Room room) {
@@ -36,13 +44,14 @@ public class RoomService {
 		return dao.delete(room);
 	}
 	
-	public List<Room> selectAll() {
+	public List<Room> selectAll(long space_num) {
 		logger.info("selectAll()...");
-		return dao.selectAll();
+		return dao.selectAll(space_num);
 	}
 	
 	public Room selectOne(Room room) {
 		logger.info("selectOne()...");
 		return dao.selectOne(room);
 	}
+	
 }

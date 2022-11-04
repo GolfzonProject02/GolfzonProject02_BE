@@ -1,4 +1,4 @@
-package worktalk.com.host.domain;
+package worktalk.com.user.domain;
 
 
 import org.springframework.web.multipart.MultipartFile;

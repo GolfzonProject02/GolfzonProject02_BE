@@ -1,4 +1,4 @@
-package worktalk.com.user.domain;
+package worktalk.com.host.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -15,18 +15,12 @@ import lombok.ToString;
 @Setter 
 @ToString
 @EqualsAndHashCode
-public class Customer_center implements Serializable{
-	private Long cc_num;
+public class Qna implements Serializable{
+	private Long q_num;
+	private Long space_num;
 	private String writer;
-	private String title;
-	private String content;
 	private String type;
-	private Timestamp cc_date;
-	private String imgname;
-	
-//	private Long fnum;
-	private MultipartFile multipartFile;
-//	private List<MultipartFile> multipartFile;
-	
-	
+	private String content;
+	private Timestamp q_date;
+
 }

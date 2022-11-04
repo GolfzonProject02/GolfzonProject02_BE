@@ -1,5 +1,7 @@
 package worktalk.com.host.service;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +25,10 @@ public class RoomMultipartService {
 		logger.info("getVO()...");
 		return fao.getVO(room);//return 1을 받고 controller에 1보내줌
 	}
+	
+//	public Room getVO(Map<String, Room> map) {
+//		logger.info("getVO()...");
+//		return fao.getVO(map);//return 1을 받고 controller에 1보내줌
+//	}
 	
 }
