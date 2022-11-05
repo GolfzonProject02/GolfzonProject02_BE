@@ -1,4 +1,4 @@
-package worktalk.com.host.repository;
+package worktalk.com.user.repository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,10 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import worktalk.com.host.domain.Qna;
-import worktalk.com.host.domain.Review;
-import worktalk.com.host.domain.Room;
-import worktalk.com.host.domain.Space;
+import worktalk.com.user.domain.Qna;
+import worktalk.com.user.domain.Review;
+import worktalk.com.user.domain.Room;
+import worktalk.com.user.domain.Space;
 
 @Repository
 public class SpaceDAOimpl implements SpaceDAO {
@@ -25,35 +25,11 @@ public class SpaceDAOimpl implements SpaceDAO {
 	public SpaceDAOimpl() {
 		logger.info("SpaceDAOimpl()....");
 	}
-
+	
 	@Override
-	public int insert(Space space) {
-		logger.info("insert()....");
-		logger.info("{}", space);
-		int flag = sqlSession.insert("SQL_INSERT_SPACE", space);
-		return flag;
-	}
-
-	@Override
-	public int update(Space space) {
-		logger.info("update()....");
-		logger.info("{}", space);
-		int flag = sqlSession.update("SQL_UPDATE_SPACE", space);
-		return flag;
-	}
-
-	@Override
-	public int delete(Space space) {
-		logger.info("delete()....");
-		logger.info("{}", space);
-		int flag = sqlSession.delete("SQL_DELETE_SPACE", space);
-		return flag;
-	}
-
-	@Override
-	public Space selectOne(long space_num) {
+	public Space selectOne(Space space) {
 		logger.info("selectOne()...");
-		Space space2 = sqlSession.selectOne("SQL_SELECT_ONE_SPACE", space_num);
+		Space space2 = sqlSession.selectOne("SQL_SELECT_ONE_SPACE", space);
 		logger.info("{}", space2);
 
 		return space2;
@@ -68,18 +44,31 @@ public class SpaceDAOimpl implements SpaceDAO {
 	}
 
 	@Override
-	public List<Space> searchList(String searchWord) {
+	public List<Space> searchList(String searchKey, String searchWord) {
 		logger.info("searchList()....");
-//		logger.info("searchKey:{}",searchKey);
+		logger.info("searchKey:{}",searchKey);
 		logger.info("searchWord:{}",searchWord);
 		
 		Map<String,String> map = new HashMap<String, String>();
-//		map.put("searchKey", searchKey);
-		map.put("searchWord", "%"+searchWord+"%");
+		map.put("searchKey", searchKey);
+		if (searchKey.equals("space_type")) {
+			map.put("searchWord", searchWord);
+		} else {
+			map.put("searchWord", "%" + searchWord + "%");
+		}
 		
 		List<Space> space_list = sqlSession.selectList("SQL_SEARCH_LIST_SPACE",map);
 		
 		return space_list;
+	}
+
+	@Override
+	public List<Qna> findQna(long space_num) {
+		logger.info("findQna()...");
+		List<Qna> qna_list = sqlSession.selectOne("SQL_FIND_QNA", space_num);
+		logger.info("{}", space_num);
+
+		return qna_list;
 	}
 
 	@Override
@@ -92,15 +81,6 @@ public class SpaceDAOimpl implements SpaceDAO {
 	}
 
 	@Override
-	public List<Qna> findQna(long space_num) {
-		logger.info("findQna()...");
-		List<Qna> qna_list = sqlSession.selectList("SQL_FIND_QNA", space_num);
-		logger.info("{}", space_num);
-
-		return qna_list;
-	}
-
-	@Override
 	public List<Review> findReview(long space_num) {
 		logger.info("findReview()...");
 		List<Review> review_list = sqlSession.selectList("SQL_FIND_REVIEW", space_num);
@@ -109,5 +89,11 @@ public class SpaceDAOimpl implements SpaceDAO {
 		return review_list;
 	}
 
-	
+	@Override
+	public List<Space> recommendRegion() {
+		logger.info("recommendRegion()...");
+		List<Space> space_list = sqlSession.selectList("SQL_RECOMMEND_REGION");
+
+		return space_list;
+	}
 }

@@ -33,7 +33,7 @@ public class RoomFAOimpl implements RoomFAO {
 			logger.info("{}", originFilename);
 			room.setRoom_img(originFilename);
 
-			String dir_path = context.getRealPath("resources/upload/space");
+			String dir_path = context.getRealPath("resources/upload/room");
 			logger.info(dir_path);
 
 			File saveFile = new File(dir_path, room.getRoom_img());
@@ -52,7 +52,5 @@ public class RoomFAOimpl implements RoomFAO {
 		}
 		return room;
 	}
-
-
 
 }

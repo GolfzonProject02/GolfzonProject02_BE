@@ -26,13 +26,12 @@
 	</update>
 
 	<delete id="SQL_DELETE_SPACE" parameterType="worktalk.com.host.domain.Space">
-		DELETE FROM space WHERE
-		cc_num=#{cc_num}
+		DELETE FROM space WHERE space_num=#{space_num}
 	</delete>
 
 	<select id="SQL_SELECT_ONE_SPACE" resultType="worktalk.com.host.domain.Space"
 		parameterType="worktalk.com.host.domain.Space">
-		SELECT * FROM space WHERE space_num = #{space_num}
+		SELECT s.*, m.email, m.tel FROM member m left join space s on m.name = s.host where space_num = #{space_num}
 		</select>
 
 	<select id="SQL_SELECT_ALL_SPACE" resultType="worktalk.com.host.domain.Space"
@@ -40,15 +39,29 @@
 		SELECT * FROM space ORDER BY space_num DESC
 	</select>
 
-	<select id="SQL_SEARCH_LIST_SPACE" resultType="worktalk.com.host.domain.Space"
+<!-- 		사무공간 검색창에 키워드검색 : 사무공간명 or 주소 or 세부공간명과 일치하는 키워드 검색하기 -->
+		<select id="SQL_SEARCH_LIST_SPACE" resultType="worktalk.com.host.domain.Space"
 		parameterType="hashmap">
-		select * from space
-		<if test="searchKey == 'title'">
-			where title like #{searchWord} order by cc_num desc
-		</if>
-		<if test="searchKey == 'content'">
-			where content like #{searchWord} order by cc_num desc
-		</if>
-
+		select distinct s.* from space s left join room r on s.space_num = r.space_num 
+		where space_name like #{searchWord} or address like #{searchWord} or room_name like #{searchWord} order by s.space_num desc
 	</select>
+	
+	<select id="SQL_FIND_ROOM" resultType="worktalk.com.host.domain.Room"
+		parameterType="worktalk.com.host.domain.Room">
+		SELECT * FROM room WHERE space_num = #{space_num}
+		ORDER BY room_num DESC
+	</select>
+	
+	<select id="SQL_FIND_QNA" resultType="worktalk.com.host.domain.Qna"
+		parameterType="worktalk.com.host.domain.Qna">
+		SELECT * FROM qna WHERE space_num = #{space_num}
+		ORDER BY q_num DESC
+	</select>
+	
+<!-- 	<select id="SQL_FIND_REVIEW" resultType="worktalk.com.host.domain.Review" -->
+<!-- 		parameterType="worktalk.com.host.domain.Review"> -->
+<!-- 		SELECT * FROM review WHERE space_num = #{space_num} -->
+<!-- 		ORDER BY q_num DESC -->
+<!-- 	</select> -->
+	
 </mapper>
