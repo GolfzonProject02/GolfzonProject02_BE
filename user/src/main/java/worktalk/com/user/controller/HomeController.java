@@ -40,7 +40,9 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		logger.info("user_name: {}", session.getAttribute("user_name"));
+		
+		return "main";
 	}
 	
 }

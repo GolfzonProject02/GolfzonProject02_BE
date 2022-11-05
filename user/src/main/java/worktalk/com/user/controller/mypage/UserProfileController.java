@@ -45,7 +45,7 @@ public class UserProfileController {
 		model.addAttribute("User_profile", user1);
 		
 		
-		return "home";
+		return "mypage/profill";
 	}
 	
 //	/**

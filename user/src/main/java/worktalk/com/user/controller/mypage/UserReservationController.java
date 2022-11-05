@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import worktalk.com.user.domain.Reservation;
-import worktalk.com.user.service.ReservationServiceDAO;
+import worktalk.com.user.service.ReservationService;
 
 /**
  * Handles requests for the application mypage.
@@ -26,7 +26,7 @@ public class UserReservationController {
 	@Autowired
 	HttpSession session;
 	@Autowired
-	ReservationServiceDAO myReserveServiceDAO;
+	ReservationService myReserveServiceDAO;
 	
 	
 	/**

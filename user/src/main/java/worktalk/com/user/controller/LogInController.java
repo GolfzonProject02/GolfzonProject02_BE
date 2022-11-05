@@ -29,18 +29,16 @@ public class LogInController {
 	@Autowired
 	MailSenderService mailSender;
 	@Autowired
-	UserDAO dao;
-	@Autowired
 	HttpSession session;
 	
 	/**
 	 * requesting login form page
 	 */
 	
-	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
+	@RequestMapping(value = "login.do", method = RequestMethod.GET)
 	public String join() {
 		logger.info("Welcome join.do!");
-		return "join/login";
+		return "login/login";
 	}
 	
 	/**
@@ -49,7 +47,7 @@ public class LogInController {
 	 * if fails => redirecting to login page
 	 */
 	
-	@RequestMapping(value = "/loginOK.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/loginOK.do", method = RequestMethod.POST)
 	public String loginOK(User user, HttpServletRequest request) {
 		logger.info("Welcome loginOK.do!");
 		logger.info("user: {}", user);
@@ -57,7 +55,7 @@ public class LogInController {
 		User user1 = loginService.login(user);
 		
 		if (user1 == null) {
-			return "redirect:join/login";
+			return "redirect:login.do";
 		} else {
 			session.setAttribute("user_name", user1.getName());
 			logger.info("user_name: {}", session.getAttribute("user_name"));
