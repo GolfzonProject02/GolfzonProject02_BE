@@ -51,7 +51,7 @@ public class UserDAOimpl implements UserDAO {
 		logger.info("{}", user);
 		
 		User result = sqlSession.selectOne("SQL_FIND_BY_NAME", user);
-		logger.info("{}", result);
+		logger.info("result: {}", result);
 		if (result == null) {
 			return 0;
 		} else {

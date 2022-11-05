@@ -37,7 +37,7 @@ public class JoinController {
 	@RequestMapping(value = "/join.do", method = RequestMethod.GET)
 	public String join() {
 		logger.info("Welcome join!");
-		return "join/mailTest";
+		return "login/login";
 	}
 	
 	/**
@@ -49,15 +49,16 @@ public class JoinController {
 	@RequestMapping(value = "/joinOK.do", method = RequestMethod.POST)
 	public String join(User user) {
 		logger.info("Welcome joinOK.do!");
+		user.setTel("010");
 		logger.info("{}", user);
 		
-		int flag = dao.join(user);
+		int flag = service.join(user);
 		
 		if (flag == 0) {
-			return "redirect:";
+			return "redirect:login.do";
 		} else {
 			logger.info("flag = {}", flag);
-			return "redirect:";
+			return "redirect:login.do";
 		}
 	}
 	
@@ -67,12 +68,14 @@ public class JoinController {
 	 * @return 1 if there's duplicated name on Member Table, 0 if there's no duplicated name
 	 */
 	
-	@RequestMapping(value = "/checkDuplicatedName.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/checkDuplicatedName.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String checkDuplicated(User user) {
 		logger.info("Welcome checkDuplicatedName.do!");
 		
 		int result = service.checkDuplicatedName(user);
+		
+		logger.info("result: {}", result);
 		
 		return String.valueOf(result);
 	}

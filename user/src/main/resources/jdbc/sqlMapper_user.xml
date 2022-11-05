@@ -18,6 +18,9 @@
 			<if test="pw != null">
 				PW=#{pw}
 			</if>
+			<if test="email != null">
+				email=#{email}
+			</if>
 			<if test="imgname != null">
 				IMGNAME=#{imgname}
 			</if>

@@ -1,6 +1,5 @@
 package worktalk.com.user.service;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,14 +12,14 @@ import worktalk.com.user.domain.Reservation_status;
 import worktalk.com.user.repository.ReservationDAO;
 
 @Service
-public class ReservationServiceDAOimpl implements ReservationServiceDAO {
+public class ReservationServiceimpl implements ReservationService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ReservationServiceDAOimpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(ReservationServiceimpl.class);
 
 	@Autowired
 	ReservationDAO dao;
 	
-	public ReservationServiceDAOimpl() {
+	public ReservationServiceimpl() {
 		logger.info("ReservationServiceDAOimpl()....");
 	}
 	
@@ -34,17 +33,18 @@ public class ReservationServiceDAOimpl implements ReservationServiceDAO {
 		
 		reservation.setStatus(Reservation_status.예약완료.toString());
 		
-		// creating dummy data for timestamp data
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 		
-		String ts = sdf.format(System.currentTimeMillis());
-		
-		logger.info("ts: {}", ts);
-		
-		reservation.setR_start(ts);
-		reservation.setR_end(ts);
-		reservation.setR_date(ts);
-		// creating dummy data for timestamp data
+		/*
+		 * // creating dummy data for timestamp data SimpleDateFormat sdf = new
+		 * SimpleDateFormat("yyyy/MM/dd HH:mm");
+		 * 
+		 * String ts = sdf.format(System.currentTimeMillis());
+		 * 
+		 * logger.info("ts: {}", ts);
+		 * 
+		 * reservation.setR_start(ts); reservation.setR_end(ts);
+		 * reservation.setR_date(ts); // creating dummy data for timestamp data
+		 */		 		 		
 		
 		return dao.reserve(reservation);
 	}
@@ -92,6 +92,20 @@ public class ReservationServiceDAOimpl implements ReservationServiceDAO {
 		logger.info("{}", reservation);
 
 		return dao.findReservationByStatus(reservation);
+	}
+
+	@Override
+	public int delete(Reservation reservation) {
+		logger.info("findReservationByStatus()....");
+		logger.info("{}", reservation);
+		return dao.delete(reservation);
+	}
+
+	@Override
+	public long findSpaceNum(Reservation reservation) {
+		logger.info("findReservationByStatus()....");
+		logger.info("{}", reservation);
+		return dao.findSpaceNum(reservation);
 	}
 
 }

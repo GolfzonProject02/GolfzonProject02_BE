@@ -33,6 +33,7 @@ public class JoinServiceImpl implements JoinService {
 	public int join(User user) {
 		logger.info("join()....");
 		logger.info("{}", user);
+		user.setImgname("profill.png");
 		return dao.join(user);
 	}
 

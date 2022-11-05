@@ -123,4 +123,20 @@ public class ReservationDAOimpl implements ReservationDAO {
 		return list;
 	}
 
+
+	@Override
+	public int delete(Reservation reservation) {
+		logger.info("delete()....");
+		logger.info("{}", reservation);
+		return sqlSession.delete("SQL_RESERVATION_DELETE", reservation);
+	}
+
+
+	@Override
+	public long findSpaceNum(Reservation reservation) {
+		logger.info("findSpaceNum()....");
+		logger.info("{}", reservation);
+		return sqlSession.selectOne("SQL_FIND_SPACE_NUM", reservation);
+	}
+
 }
