@@ -139,18 +139,4 @@ public class PaymentController {
 		
 		return "home";
 	}
-	
-	
-	
-	@RequestMapping(value = { "/space_selectOne.do" }, method = RequestMethod.GET)
-	public String space_selectOne(
-			Model model, Locale locale ,HttpSession session, Pay pay, long space_num)
-					throws IamportResponseException, IOException {
-		
-		logger.info("Welcome space_selectOne!");
-		logger.info("space_num: {}", space_num);
-		
-		return "spacepage/spacedetail";
-	}
-
 }
