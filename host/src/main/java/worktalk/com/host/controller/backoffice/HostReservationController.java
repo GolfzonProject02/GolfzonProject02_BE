@@ -1,5 +1,6 @@
 package worktalk.com.host.controller.backoffice;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.siot.IamportRestClient.exception.IamportResponseException;
+
+import worktalk.com.host.domain.Pay;
 import worktalk.com.host.domain.Reservation;
 import worktalk.com.host.domain.Reservation_status;
+import worktalk.com.host.service.PayService;
 import worktalk.com.host.service.ReservationService;
 
 /**
@@ -29,7 +34,9 @@ public class HostReservationController {
 	@Autowired
 	HttpSession session;
 	@Autowired
-	ReservationService service;
+	ReservationService reserveService;
+	@Autowired
+	PayService payService;
 	
 	/**
 	 * Requesting for host home page
@@ -44,8 +51,9 @@ public class HostReservationController {
 		
 		logger.info("{}", reservation);
 		
-		List<Reservation> reservation_list =  service.findReservationByName(reservation);
+		List<Reservation> reservation_list =  reserveService.findReservationByName(reservation);
 		logger.info("reservation_list : {}",reservation_list);
+		logger.info("reservation_list.size : {}",reservation_list.size());
 		
 		model.addAttribute("reservation_list", reservation_list);
 		
@@ -61,8 +69,9 @@ public class HostReservationController {
 		
 		logger.info("{}", reservation);
 		
-		List<Reservation> reservation_list_status =  service.findReservationByKeywords(reservation);
+		List<Reservation> reservation_list_status =  reserveService.findReservationByKeywords(reservation);
 		logger.info("reservation_list_status : {}",reservation_list_status);
+		logger.info("reservation_list.size : {}",reservation_list_status.size());
 		
 		
 		return reservation_list_status;
@@ -73,8 +82,8 @@ public class HostReservationController {
 	public Reservation end(Reservation reservation) {
 		logger.info("Welcome end!");
 		
-		reservation.setStatus(Reservation_status.End.toString());
-		Reservation end_result = service.updateStatus(reservation);
+		reservation.setStatus(Reservation_status.이용완료.toString());
+		Reservation end_result = reserveService.updateStatus(reservation);
 		logger.info("{}", end_result);
 
 		
@@ -82,18 +91,24 @@ public class HostReservationController {
 	}
 	
 	
-	@RequestMapping(value = "/backoffice/reservation/cancel.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/backoffice/reservation/cancel.do", method = RequestMethod.GET)
 	@ResponseBody
-	public Reservation cancel(Reservation reservation) {
+	public Reservation cancel(Reservation reservation) throws IamportResponseException, IOException {
 		logger.info("Welcome cancel!");
 		logger.info("{}", reservation);
 		
-		Reservation cancel_result = service.cancel(reservation);
+		Reservation cancel_result = reserveService.cancel(reservation);
 		logger.info("{}", cancel_result);
-
+		
+		if (cancel_result == null) {
+			return null;
+		} else {
+			Pay pay = new Pay();
+			pay.setR_num(reservation.getR_num());
+			payService.cancelByUid(pay);
+		}
 		
 		return cancel_result;
 	}
-	
 	
 }
