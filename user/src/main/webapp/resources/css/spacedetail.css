@@ -69,11 +69,6 @@ a {
     color: rgb(126, 123, 123);
     margin-bottom: 5px;
 }
-/* 하단디자인 */
-#detail_bottom {
-    display: flex;
-    justify-content: space-around;
-}
 /* 하단-네비게이션바 */
 #navVar {
     display: flex;
@@ -114,7 +109,7 @@ a {
 #detailContent {
     padding-left: 20px;
 }
-#spaceItro {
+#spaceItro, #spaceGuide {
     position: relative;
 }
 #detailContent p {
@@ -139,90 +134,6 @@ a {
     height: 25px;
     cursor: pointer;
 }
-/* 공간수정 */
-#update_spaceItro{
-    position: relative;
-    margin-left: 20px;
-    width: 500px;
-    border: 3px solid gray;
-    border-radius: 15px;
-    padding: 10px;
-}
-#update_space_detail{
-    margin: 10px;
-    margin-bottom: 30px;
-    width: 460px;
-    font-size: 15px;
-    resize: none;
-    border-radius: 15px;
-    padding: 10px;
-}
-#spaceInfo_textCount{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: gray;
-}
-#update_space_detail_close{
-    position: absolute;
-    bottom: 10px;
-    right: 60px;
-    border-radius: 5px;
-    background-color: white;
-    width: 40px;
-    height: 25px;
-    cursor: pointer;
-}
-#update_space_detail_submit{
-    position: absolute;
-    bottom: 10px;
-    right: 15px;
-    border-radius: 5px;
-    background-color: white;
-    width: 40px;
-    height: 25px;
-    cursor: pointer;
-}
-/* 세부공간 수정 */
-.reservationBox{
-    position: relative;
-    width: 300px;
-    height: 350px;
-    border: 1px solid gray;
-    border-radius: 10px;
-    padding: 10px;
-    margin-left: 20px;
-}
-.reservationBox>div {
-    margin: 10px 0px;
-}
-#roomImgBox {
-    width: 300px;
-    height: 250px;
-    overflow: hidden;
-}
-.roomImg {
-    width: 300px;
-    height: 250px;
-    object-fit: contain;
-}
-.roomController button {
-    position: absolute;
-    width: 30px;
-    height: 50px;
-    top: 150px;
-    font-size: 30px;
-    cursor: pointer;
-    border: 0px;
-    border-radius: 5px;
-    background-color: rgba(20, 20, 20, 0.123);
-    color: white;
-}
-.roomController button:hover {
-    background-color: rgba(44, 85, 196, 0.459);
-}
-.roomPrev {left: 10px;}
-.roomNext {right: 15px;}
 /* QNA */
 #spaceQNA {
     position: relative;
@@ -356,26 +267,4 @@ a {
 }
 .writeDate {
     color: gray;
-
-}
-/* 호스트 qna 답글 */
-.QNA_box, .review_box {
-    position: relative;
-}
-#host_insert, #host_update {
-    position: absolute;
-    background-color: white;
-    border: 1px solid gray;
-    border-radius: 5px;
-    padding: 10px;
-    top: 0px;
-    z-index: 1;
-}
-#qc_comment, #rv_comment {
-    margin-bottom: 10px;
-    width: 500px;
-    height: 80px;
-    resize: none;
-    padding: 10px;
-
 }

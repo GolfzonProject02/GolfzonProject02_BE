@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.GsonBuilder;
 
 import worktalk.com.host.domain.Qna;
+import worktalk.com.host.domain.QnaComment;
 import worktalk.com.host.domain.Room;
 import worktalk.com.host.domain.Space;
+import worktalk.com.host.repository.QnaCommentDAO;
+import worktalk.com.host.repository.QnaDAO;
 import worktalk.com.host.repository.SpaceDAO;
 import worktalk.com.host.service.RoomMultipartService;
 import worktalk.com.host.service.RoomService;
@@ -51,10 +54,15 @@ public class BackofficeController {
 
 	@Autowired
 	RoomMultipartService r_service_file;
+	
+	@Autowired
+	QnaDAO q_dao;
 
+	@Autowired
+	QnaCommentDAO qc_dao;
 	
 	// 공간전체목록페이지
-	@RequestMapping(value = "/backoffice/main.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public String selectAll(Model model) {
 		logger.info("Welcome selectAll!");
 
@@ -79,11 +87,12 @@ public class BackofficeController {
 //		List<Room> room_list = r_service.selectAll(space_num);
 //		logger.info("room_list.size() : {}", room_list.size());
 		
+		
 		List<Room> room_list = dao.findRoom(space_num);
 		logger.info("room_list.size() : {}", room_list.size());
 		logger.info("room_list : {}", room_list);
 		
-		List<Qna> qna_list = dao.findQna(space_num);
+		List<Qna> qna_list = q_dao.findQnaBySpaceNum(space_num);
 		logger.info("qna_list.size() : {}", qna_list.size());
 		logger.info("qna_list : {}", qna_list);
 				

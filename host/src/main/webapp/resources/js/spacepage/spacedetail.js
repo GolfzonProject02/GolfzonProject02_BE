@@ -1,3 +1,29 @@
+
+let today = new Date();
+let year = Number(today.getFullYear());
+let month = Number(today.getMonth());
+let date = Number(today.getDate());
+let hours = Number(today.getHours());
+let minutes = Number(today.getMinutes());
+month = month + 1;
+if (month < 10) {
+    month = "0" + month;
+    if (date < 10) {date = "0" + date;}
+} else {
+    if (date < 10) {date = "0" + date;}
+}
+if (hours < 10) {
+    hours = "0" + hours;
+    if (minutes < 10) {minutes = "0" + minutes;}
+} else {
+    if (minutes < 10) {minutes = "0" + minutes;}
+}
+today = year+"-"+month+"-"+date;
+today_time = year+"-"+month+"-"+date+" "+hours+":"+minutes;
+console.log("today : "+today);
+console.log("today_time : "+today_time);
+
+
 // menu Open Close 함수
 function menutabOpen() {
     const menutab = document.getElementById('menutab');
@@ -10,21 +36,6 @@ function menutabOpen() {
             pageMove('@login/login.html');
         }
     }
-
-    // menu 로그인/회원가입 출력
-    const login = 0;
-    const login_tag = document.getElementById('login');
-    if(login == 0) {
-        login_tag.innerHTML = `<a href="login.do">
-        <p>로그인 / 회원가입</p>
-        </a>`;
-    }else if(login == 1) {
-        login_tag.innerHTML = 
-            `<a href="프로필페이지">
-                <img src="image/icon/profill.png">
-                <p>admin</p>
-            </a>`;
-}
 
 // 이미지 슬라이드
 function next(x) {
@@ -195,7 +206,131 @@ $('#spaceItro').on('submit','#roomAddSubmit',function(){
     $('#update_spaceItro').detach();
 })
 
-// 세부공간 수정
+// QNA 답글 : Q_NUM, qc_comment, host, qc_date
+console.log(document.location.pathname)
+console.log(document.location.search)
+const params = new URL(location.href).searchParams;
+const space_num = params.get('space_num')
+console.log(space_num)
+
+$('.qna_host_insert').click(function(){
+    console.log("클릭")
+    let q_num = $(this).parent().children('.q_num').val();
+    let loginOK = $('#loginOK').text();
+    console.log(q_num, loginOK);
+    $('#host_insert').detach();
+    $('#host_update').detach();
+    $(this).after(`
+        <div id="host_insert">
+            <p>답글작성</p>
+            <form action="qna_insert.do" method="post">
+                <textarea name="qc_comment" id="qc_comment"></textarea>
+                <input type="submit" id="qna_insert_submit" value="작성">
+                <button id="qc_close">닫기</button>
+                <input type="text" name="q_num" id="q_num" value="${q_num}" hidden>
+                <input type="text' id="host" name="host" value="${loginOK}" hidden>
+                <input type="text' id="space_num" name="space_num" value="${space_num}" hidden>
+            </form>
+        </div>
+    `)
+})
+$('.qna_host_update').click(function(){
+    let q_num = $(this).parent().children('.q_num').val();
+    let loginOK = $('#loginOK').text();
+    $('#host_insert').detach();
+    $('#host_update').detach();
+    console.log(q_num, loginOK);
+    $(this).after(`
+        <div id="host_update">
+            <p>답글수정</p>
+            <form action="qna_update.do" method="post">
+                <textarea name="qc_comment" id="qc_comment"></textarea>
+                <input type="submit" id="qna_update_submit" value="수정">
+                <button id="qc_close">닫기</button>
+                <input type="text" name="q_num" id="q_num" value="${q_num}" hidden>
+                <input type="text' id="host" name="host" value="${loginOK}" hidden>
+                <input type="text' id="space_num" name="space_num" value="${space_num}" hidden>
+            </form>
+        </div>
+    `)
+})
+
+$('#QNA').on('click','#qc_close',function(){
+    console.log("클릭");
+    $('#host_insert').detach();
+    $('#host_update').detach();
+})
+
+$('.qna_host_delelte').click(function(){
+    let q_num = $(this).parent().children('.q_num').val();
+    if(confirm('정말 삭제하시겠습니까?')) {
+    	$(location).attr('href',"qna_delete.do?q_num=" + q_num+"&space_num="+space_num);
+    }
+})
+
+
+
+// 리뷰 답글 : rv_num, host, rc_comment, rc_date
+$('.rv_host_insert').click(function(){
+    console.log("클릭")
+    let rv_num = $(this).parent().children('.rv_num');
+    let host_name = $('#loginOk').text();
+    $('#host_insert').detach();
+    $('#host_update').detach();
+    $(this).after(`
+        <div id="host_insert">
+            <p>답글작성</p>
+            <form action="rv_insert.do" method="post">
+                <textarea name="rv_comment" id="rv_comment"></textarea>
+                <input type="submit" id="rv_insert_submit" value="작성">
+                <button id="rv_close">닫기</button>
+                <input type="text" name="rv_num" id="rv_num" value="${rv_num}" hidden>
+                <input type="text' id="writer" name="writer" value="${host_name}" hidden>
+            </form>
+        </div>
+    `)
+})
+
+$('.rv_host_update').click(function(){
+    console.log("클릭")
+    let rv_num = $(this).parent().children('.rv_num');
+    let host_name = $('#loginOk').text();
+    $('#host_insert').detach();
+    $('#host_update').detach();
+    $(this).after(`
+        <div id="host_update">
+            <p>답글수정</p>
+            <form action="rv_update.do" method="post">
+                <textarea name="rv_comment" id="rv_comment"></textarea>
+                <input type="submit" id="rv_update_submit" value="수정">
+                <button id="rv_close">닫기</button>
+                <input type="text" name="rv_num" id="rv_num" value="${q_num}" hidden>
+                <input type="text' id="writer" name="writer" value="${host_name}" hidden>
+            </form>
+        </div>
+    `)
+})
+
+$('#reviews').on('click','#rv_close',function(){
+    console.log("클릭");
+    $('#host_insert').detach();
+    $('#host_update').detach();
+})
+
+$('.rv_host_delelte').click(function(){
+    let rv_num = $(this).parent().children('.rv_num').val();
+    if(confirm('정말 삭제하시겠습니까?')) {
+        $.ajax({
+            type : "get",
+            url : "customercenter_delete.do?rv_num=" + rv_num,
+            success : function(data){
+                alert("삭제완료");
+            }
+        })
+    }
+})
+
+
 
 // kakaomap
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -244,4 +379,6 @@ function getInfo() {
 }
 // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 var zoomControl = new kakao.maps.ZoomControl();
+
 map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+

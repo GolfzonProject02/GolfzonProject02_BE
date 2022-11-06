@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import worktalk.com.user.domain.Customer_center;
+import worktalk.com.user.domain.Review;
+import worktalk.com.user.repository.QnaDAO;
+import worktalk.com.user.repository.ReviewDAO;
 import worktalk.com.user.service.Customer_centerFileService;
 import worktalk.com.user.service.Customer_centerService;
 
@@ -27,6 +30,12 @@ public class MypageController {
 
 	@Autowired
 	Customer_centerFileService service_file;
+	
+	@Autowired
+	QnaDAO q_dao;
+	
+	@Autowired
+	ReviewDAO rv_dao;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -103,5 +112,16 @@ public class MypageController {
 //		return "mypage/selectAll";
 	}
 
-	
+	//qna관리 페이지
+			@RequestMapping(value = "/mypage/reviewqna.do", method = RequestMethod.GET)
+			public String selectAll(Model model, String writer) {
+				logger.info("Welcome selectAll");
+				
+				List<Review> review_list = rv_dao.findByName(writer);
+				logger.info("review_list.size() : {}",review_list.size());
+				
+				model.addAttribute("review_list",review_list);
+				
+				return "reviewqna/reviewqna";
+			}
 }

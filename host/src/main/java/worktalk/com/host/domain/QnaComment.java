@@ -1,4 +1,4 @@
-package worktalk.com.user.domain;
+package worktalk.com.host.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -15,14 +15,8 @@ import lombok.ToString;
 @Setter 
 @ToString
 @EqualsAndHashCode
-public class Qna implements Serializable{
-	private Long q_num;
-	private Long space_num;
-	private String writer;
-	private String type;
-	private String content;
-	private Timestamp q_date;
-	
+public class QnaComment implements Serializable{
+	private long q_num;
 	private String host;
 	private String qc_comment;
 	private Timestamp qc_date;
