@@ -11,12 +11,17 @@
 
 	<select id="SQL_SELECT_ALL_SPACE" resultType="worktalk.com.user.domain.Space"
 		parameterType="worktalk.com.user.domain.Space">
-		SELECT * FROM space ORDER BY space_num DESC
+		SELECT space_num,host,space_name,space_detail,postcode,
+		substr(address,0,instr(address,'시')) as address,
+		detail_address,reg_code,space_type,space_status,space_img 
+		FROM space ORDER BY space_num DESC
 	</select>
 
 	<select id="SQL_SEARCH_LIST_SPACE" resultType="worktalk.com.user.domain.Space"
 		parameterType="hashmap">
-		select * from space
+		select space_num,host,space_name,space_detail,postcode,
+		substr(address,0,instr(address,'시')) as address,
+		detail_address,reg_code,space_type,space_status,space_img from space
 		<if test="searchKey == 'space_type'">
 			where space_type = #{searchWord} order by space_num desc
 		</if>
@@ -48,7 +53,9 @@
 
 		<select id="SQL_RECOMMEND_REGION" resultType="worktalk.com.user.domain.Space"
 		parameterType="hashmap">
-			SELECT * FROM space
+			SELECT space_num,host,space_name,space_detail,postcode,
+		substr(address,0,instr(address,'시')) as address,
+		detail_address,reg_code,space_type,space_status,space_img  FROM space
 			WHERE address like '%춘천%' order by space_name asc
 	</select>
 </mapper>

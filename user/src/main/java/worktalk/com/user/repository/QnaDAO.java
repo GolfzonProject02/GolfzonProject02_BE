@@ -12,7 +12,7 @@ public interface QnaDAO {
 
 	public int delete(Qna qna);
 
-	public List<Qna> selectAll(long space_num);
+	public List<Qna> findQnaByspaceNum(long space_num);
 
-//	public List<QNA> searchList(String searchKey, String searchWord);
+	public List<Qna> findQnaByName(String name);
 }

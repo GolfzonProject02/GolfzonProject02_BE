@@ -16,11 +16,15 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public class Qna implements Serializable{
-	private Long q_num;
-	private Long space_num;
+	private long q_num;
+	private long space_num;
 	private String writer;
 	private String type;
 	private String content;
 	private Timestamp q_date;
+	
+	private String host;
+	private String qc_comment;
+	private Timestamp qc_date;
 
 }

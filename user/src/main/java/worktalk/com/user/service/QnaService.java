@@ -1,7 +1,5 @@
 package worktalk.com.user.service;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +31,5 @@ public class QnaService {
 		logger.info("delete()...");
 		return dao.delete(qna);
 	}
-	public List<Qna> selectAll(long space_num) {
-		logger.info("selectAll()...");
-		return dao.selectAll(space_num);
-	}	
-//	public List<QNA> searchList(String searchKey, String searchWord) {
-//		logger.info("searchList()...");
-//		return dao.searchList(searchKey, searchWord);
-//	}
 
 }

@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import worktalk.com.user.domain.Qna;
+import worktalk.com.user.domain.Review;
 import worktalk.com.user.domain.Room;
 import worktalk.com.user.domain.Space;
+import worktalk.com.user.repository.QnaDAO;
+import worktalk.com.user.repository.ReviewDAO;
 import worktalk.com.user.repository.SpaceDAO;
 import worktalk.com.user.service.SpaceService;
 
@@ -34,6 +37,12 @@ public class SpaceController {
 	
 	@Autowired
 	SpaceDAO dao;
+	
+	@Autowired
+	QnaDAO q_dao;
+	
+	@Autowired
+	ReviewDAO rv_dao;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -64,19 +73,18 @@ public class SpaceController {
 			logger.info("room_list.size() : {}", room_list.size());
 			logger.info("room_list : {}", room_list);
 			
-//			List<Qna> qna_list = dao.findQna(space_num);
-//			logger.info("qna_list.size() : {}", qna_list.size());
-//			logger.info("qna_list : {}", qna_list);
-					
-//			List<Review> review_list = dao.findReview(space_num);
-//			logger.info("review_list.size() : {}", review_list.size());
-//			logger.info("review_list : {}", review_list);
+			List<Qna> qna_list = q_dao.findQnaByspaceNum(space_num);
+			logger.info("qna_list.size() : {}", qna_list.size());
+			logger.info("qna_list : {}", qna_list);
 			
+			List<Review> review_list = rv_dao.findBySpaceNum(space_num);
+			logger.info("review_list.size() : {}", review_list.size());
+			logger.info("review_list : {}", review_list);
 			
 			model.addAttribute("space2", space2);
 			model.addAttribute("room_list", room_list);
-//			model.addAttribute("qna_list", qna_list);
-//			model.addAttribute("review_list", review_list);
+			model.addAttribute("qna_list", qna_list);
+			model.addAttribute("review_list", review_list);
 
 			return "spacepage/spacedetail";
 		}
