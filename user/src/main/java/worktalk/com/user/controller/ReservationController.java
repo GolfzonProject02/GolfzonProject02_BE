@@ -130,27 +130,27 @@ public class ReservationController {
 		logger.info("Welcome cancel.do!");
 		logger.info("reservation: {}", reservation);
 		
-		int flag = reserveService.cancel(reservation);
-		logger.info("flag: {}", flag);
+		Reservation result = reserveService.cancel(reservation);
+		logger.info("flag: {}", result);
 		Timestamp current_time = new Timestamp(System.currentTimeMillis());
 		
-		if (flag == 0) {
+		if (result == null) {
 			return null;
 		} else {
 			Pay pay = new Pay();
-			pay.setR_num(reservation.getR_num());
-			pay.setReserve_date(reservation.getR_date());
+			pay.setR_num(result.getR_num());
+			pay.setReserve_date(result.getR_date());
 			
 			Pay pay1 = payService.calRefund(pay, current_time);
 			logger.info("{}", pay1);
 			
-			Pay result = payService.cancelByUid_partial(pay1);
+			Pay p_result = payService.cancelByUid_partial(pay1);
+			result.setAmount(p_result.getP_amount());
 			
-			Reservation cancel_result = new Reservation();
-			cancel_result.setAmount(result.getP_amount());
-			return cancel_result;
+			logger.info("result: {}", result);
+			
+			return result;
 		}
-		
 	}
 	
 	/**

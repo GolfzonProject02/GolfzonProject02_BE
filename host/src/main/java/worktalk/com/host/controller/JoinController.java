@@ -26,8 +26,6 @@ public class JoinController {
 	JoinService service;
 	@Autowired
 	MailSenderService mailSender;
-	@Autowired
-	HostDAO dao;
 	
 	/**
 	 * Requesting for join form page
@@ -51,14 +49,15 @@ public class JoinController {
 		logger.info("Welcome joinOK.do!");
 		logger.info("{}", host);
 		
-		int flag = dao.join(host);
+		int flag = service.join(host);
 		
 		if (flag == 0) {
-			return "redirect:";
+			return "redirect:login.do";
 		} else {
 			logger.info("flag = {}", flag);
-			return "redirect:";
+			return "redirect:login.do";
 		}
+		
 	}
 	
 	/**
@@ -67,7 +66,7 @@ public class JoinController {
 	 * @return 1 if there's duplicated name on Member Table, 0 if there's no duplicated name
 	 */
 	
-	@RequestMapping(value = "/checkDuplicatedName.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/checkDuplicatedName.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String checkDuplicated(Host host) {
 		logger.info("Welcome checkDuplicatedName.do!");
