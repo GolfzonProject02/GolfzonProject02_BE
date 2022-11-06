@@ -42,7 +42,12 @@ public class HomeController {
 		logger.info("user_name : {}", session.getAttribute("user_name"));
 		logger.info("host_name : {}", session.getAttribute("host_name"));
 		
-		return "login/login";
+		if (session.getAttribute("host_name") == null) {
+			return "login/login";
+		} else {
+			return "main";
+		}
+		
 	}
 	
 }
