@@ -60,7 +60,7 @@ public class HostProfileFAOimpl implements HostProfileFAO {
 			
 		} else {
 			if (host.getImgname() == null) {
-				host.setImgname("profil.jpg");
+				host.setImgname("profill.png");
 			}
 		}
 		

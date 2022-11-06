@@ -53,13 +53,19 @@ public class ReservationServiceimpl implements ReservationService {
 	 * check the date before cancellation
 	 */
 	@Override
-	public int cancel(Reservation reservation) {
+	public Reservation cancel(Reservation reservation) {
 		logger.info("cancel()....");
 		logger.info("{}", reservation);
 		
 		reservation.setStatus(Reservation_status.이용자취소.toString());
 		
-		return dao.cancel(reservation);
+		int flag = dao.cancel(reservation);
+		
+		if (flag == 0) {
+			return null;
+		} else {
+			return dao.findReservationByNum(reservation);
+		}
 	}
 
 	@Override

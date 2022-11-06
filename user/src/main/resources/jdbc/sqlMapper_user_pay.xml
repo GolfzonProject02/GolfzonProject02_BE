@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id="SQL_PAY_HISTORY_BY_NAME" parameterType="worktalk.com.user.domain.Pay" resultType="worktalk.com.user.domain.Pay">
-		select p_num, r.name, uuid as imp_uid, to_char(r_date, 'yyyy-MM-dd HH:mm:ss') reserve_date , s.space_name, ro.room_name, p.p_status, r.status as reserve_status, p.amount, to_char(p_date, 'yyyy-MM-dd HH:mm:ss') p_date from reservation r join room ro on r.room_num = ro.room_num join space s on s.space_num = ro.space_num join payment p on r.r_num = p.r_num where r.name = #{p_name} by p_date desc
+		select p_num, r.name, uuid as imp_uid, to_char(r_date, 'yyyy-MM-dd HH:mm:ss') reserve_date , s.space_name, ro.room_name, p.p_status, r.status as reserve_status, p.amount, to_char(p_date, 'yyyy-MM-dd HH:mm:ss') p_date from reservation r join room ro on r.room_num = ro.room_num join space s on s.space_num = ro.space_num join payment p on r.r_num = p.r_num where r.name = #{p_name} order by p_date desc
 	</select>
 	
 	<select id="SQL_PAY_DATE_UID_BY_RNUM" parameterType="worktalk.com.user.domain.Pay" resultType="worktalk.com.user.domain.Pay">

@@ -40,7 +40,7 @@ public class LogInController {
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public String join() {
 		logger.info("Welcome join.do!");
-		return "join/login";
+		return "login/login";
 	}
 	
 	/**
@@ -49,14 +49,11 @@ public class LogInController {
 	 * if fails => redirecting to login page
 	 */
 	
-	@RequestMapping(value = "/loginOK.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/loginOK.do", method = RequestMethod.POST)
 	public String loginOK(Host host, HttpServletRequest request) {
 		logger.info("Welcome loginOK.do!");
 		
 		logger.info("host: {}", host);
-		
-		host.setEmail("host");
-		host.setPw("1234");
 		
 		Host host1 = loginService.login(host);
 		

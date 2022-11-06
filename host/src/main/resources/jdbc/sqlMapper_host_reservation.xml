@@ -9,7 +9,7 @@
 	</update>
 	
 	<update id="SQL_UPDATE_CANCEL" parameterType="worktalk.com.host.domain.Reservation">
-		UPDATE RESERVATION SET STATUS = #{status}, CANCEL_REASON = #{cancel_reason} where r_num = #{r_num} 
+		UPDATE RESERVATION SET STATUS = #{status}, CANCEL_REASON = #{cancel_reason}, R_DATE = sysdate  where r_num = #{r_num} 
 	</update>
 
 	<select id="SQL_FIND_RESERVATION_BY_NAME" parameterType="worktalk.com.host.domain.Reservation" resultType="worktalk.com.host.domain.Reservation">

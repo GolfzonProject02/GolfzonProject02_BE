@@ -8,7 +8,7 @@
 	</insert>
 	
 	<update id="SQL_CANCEL" parameterType="worktalk.com.user.domain.Reservation">
-		UPDATE RESERVATION SET STATUS = #{status}, CANCEL_REASON = #{cancel_reason} WHERE R_NUM=#{r_num}
+		UPDATE RESERVATION SET STATUS = #{status}, CANCEL_REASON = #{cancel_reason}, R_DATE = sysdate WHERE R_NUM=#{r_num}
 	</update>
 	
 	<delete id="SQL_RESERVATION_DELETE" parameterType="worktalk.com.user.domain.Reservation">
@@ -33,7 +33,7 @@
 	</select>
 	
 	<select id="SQL_FIND_RESERVATION_BY_STATUS" parameterType="worktalk.com.user.domain.Reservation" resultType="worktalk.com.user.domain.Reservation">
-		SELECT R_NUM, NAME, RESERVATION.ROOM_NUM, ROOM_NAME, ROOM.SPACE_NUM, SPACE_NAME, to_char(R_START, 'yyyy-MM-dd HH:mm:ss') R_START, to_char(R_END, 'yyyy-MM-dd HH:mm:ss') R_END, STATUS, P_STATUS, to_char(R_DATE, 'yyyy-MM-dd HH:mm:ss') R_DATE, AMOUNT, CANCEL_REASON FROM RESERVATION JOIN ROOM ON reservation.room_num = room.room_num JOIN SPACE ON room.space_num = space.space_num WHERE NAME= #{name} AND STATUS = #{status} ORDER BY R_NUM DESC
+		SELECT R_NUM, NAME, RESERVATION.ROOM_NUM, ROOM_NAME, ROOM.SPACE_NUM, SPACE_NAME, to_char(R_START, 'yyyy-MM-dd HH:mm:ss') R_START, to_char(R_END, 'yyyy-MM-dd HH:mm:ss') R_END, STATUS, P_STATUS, to_char(R_DATE, 'yyyy-MM-dd HH:mm:ss') R_DATE, AMOUNT, CANCEL_REASON FROM RESERVATION JOIN ROOM ON reservation.room_num = room.room_num JOIN SPACE ON room.space_num = space.space_num WHERE NAME= #{name} AND STATUS = #{status} ORDER BY R_DATE DESC
 	</select>
 
 </mapper>
