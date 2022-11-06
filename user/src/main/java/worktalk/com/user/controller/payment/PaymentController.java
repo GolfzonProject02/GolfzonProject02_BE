@@ -1,4 +1,4 @@
-package worktalk.com.user.controller.Payment;
+package worktalk.com.user.controller.payment;
 
 import java.io.IOException;
 import java.util.List;
@@ -60,7 +60,7 @@ public class PaymentController {
 	
 	@ResponseBody
 //	@RequestMapping(value = { "/payment/verify/{imp_uid}" }, method = RequestMethod.POST)
-	@RequestMapping(value = { "/payment/verify" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/payment/verify.do" }, method = RequestMethod.POST)
 	public IamportResponse<Payment> paymentByImpUid(Model model
 			, Locale locale
 			, HttpSession session,
@@ -90,7 +90,7 @@ public class PaymentController {
 //	}
 	
 	@ResponseBody
-	@RequestMapping(value = { "/payment/cancel" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/payment/cancel.do" }, method = RequestMethod.GET)
 	public IamportResponse<Payment> paymentCancel(
 			Model model, Locale locale ,HttpSession session, Pay pay)
 					throws IamportResponseException, IOException {
@@ -102,7 +102,7 @@ public class PaymentController {
 		return service.cancelByUid(pay.getImp_uid());
 	}
 	
-	@RequestMapping(value = { "/payment/cancel_page" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/payment/cancel_page.do" }, method = RequestMethod.GET)
 	public String paymentCancel_page(
 			Model model, Locale locale ,HttpSession session, Pay pay, long space_num)
 					throws IamportResponseException, IOException {

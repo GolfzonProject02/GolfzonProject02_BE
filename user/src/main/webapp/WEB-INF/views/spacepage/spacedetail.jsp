@@ -40,7 +40,7 @@
 					        </a>
                         </c:when>
                         <c:otherwise>
-                            <a href="http://localhost:8100/user/mypage.do?=${user_name}">
+                            <a href="http://localhost:8100/user/mypage.do">
                                 <p>${user_name}</p>
                             </a>
                         </c:otherwise>

@@ -32,7 +32,7 @@ public class UserReservationController {
 	/**
 	 * request for user reservation page
 	 */
-	@RequestMapping(value = {"mypage/reservation.do"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/mypage/reservation.do"}, method = RequestMethod.GET)
 	public String leave(Reservation reservation, Model model) {
 		logger.info("Welcome mypage/reservation.do!");
 		logger.info("{}", reservation);
@@ -50,7 +50,7 @@ public class UserReservationController {
 	/**
 	 * request for user reservation page and sort the list by status/p_status
 	 */
-	@RequestMapping(value = {"mypage/findByStatus.do"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/mypage/findByStatus.do"}, method = RequestMethod.GET)
 	public String findByStatus(Reservation reservation) {
 		logger.info("Welcome mypage/findByStatus.do!");
 		logger.info("{}", reservation);

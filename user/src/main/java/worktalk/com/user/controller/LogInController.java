@@ -58,14 +58,7 @@ public class LogInController {
 			return "redirect:login.do";
 		} else {
 			session.setAttribute("user_name", user1.getName());
-			logger.info("user_name: {}", session.getAttribute("user_name"));
-			if (request.getHeader("Refer") == null) {
-				logger.info("heading to home-page");
-				return "redirect:home.do";
-			} else {
-				logger.info("heading to previous-page");
-				return "redirect:" + request.getHeader("Referer");
-			}
+			return "redirect:/";
 		}
 	}
 	
