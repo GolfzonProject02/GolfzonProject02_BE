@@ -65,13 +65,7 @@ public class LogInController {
 				logger.info("redirecting to host page....");
 				session.setAttribute("host_name", host1.getName());
 				logger.info("host_name: {}", session.getAttribute("host_name"));
-				if (request.getHeader("Refer") == null) {
-					logger.info("redirecting to home");
-					return "redirect:/";
-				} else {
-					logger.info("redirecting to previous page");
-					return "redirect:" + request.getHeader("Referer");
-				}
+				return "redirect:/";
 			} else {
 				logger.info("redirecting to master page....");
 				session.setAttribute("master_name", host1.getName());

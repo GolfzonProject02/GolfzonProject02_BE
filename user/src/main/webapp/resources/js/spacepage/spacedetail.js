@@ -428,7 +428,7 @@ $('#rBox').on('submit','#reservationOK', function(){
 		// 결제검증
 		$.ajax({
         	type : "POST",
-        	url : "http://localhost:8100/user/payment/verify", 
+        	url : "http://localhost:8100/user/payment/verify.do", 
         	data: {
                 imp_uid: rsp.imp_uid,            //결제 고유번호     
                 merchant_uid: rsp.merchant_uid   //주문번호
@@ -471,7 +471,7 @@ $('#rBox').on('submit','#reservationOK', function(){
         		$(function(){
         			console.log("jquery Not OK....");
         			$.ajax({
-                    	url: "http://localhost:8100/user/payment/cancel/" + rsp.imp_uid, 
+                    	url: "http://localhost:8100/user/payment/cancel.do/" + rsp.imp_uid, 
                     	type: "POST",
                     	data: {
                         	imp_uid: rsp.imp_uid,            //결제 고유번호     
