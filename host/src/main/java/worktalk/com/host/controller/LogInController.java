@@ -59,7 +59,7 @@ public class LogInController {
 		
 		if (host1 == null) {
 			logger.info("longin failed....");
-			return "redirect:join/login";
+			return "redirect:login.do";
 		} else {
 			if (host1.getRole() == 1) {
 				logger.info("redirecting to host page....");
