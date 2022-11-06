@@ -32,6 +32,7 @@ public class ReservationServiceimpl implements ReservationService {
 	@Override
 	public Reservation updateStatus(Reservation reservation) {
 		logger.info("updateStatus()....");
+		
 		logger.info("{}", reservation);
 
 		int flag = dao.updateStatus(reservation);
@@ -49,7 +50,7 @@ public class ReservationServiceimpl implements ReservationService {
 		logger.info("cancel()....");
 		logger.info("{}", reservation);
 		
-		reservation.setStatus(Reservation_status.Canceled_by_host.toString());
+		reservation.setStatus(Reservation_status.호스트취소.toString());
 		
 		int flag = dao.cancel(reservation);
 		logger.info("flag: {}", flag);

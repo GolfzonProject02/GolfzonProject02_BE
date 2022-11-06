@@ -60,10 +60,10 @@ public class ReservationController {
 			if (reservation.getRoom_num() != 0) {
 				logger.info("cancelling => redirecting to space_selectOne()....");
 				long space_num = reserveService.findSpaceNum(reservation);
-				return "payment/cancel_page?imp_uid="+pay.getImp_uid()+"&space_num="+space_num;
+				return "payment/cancel_page.do?imp_uid="+pay.getImp_uid()+"&space_num="+space_num;
 			} else {
 				logger.info("cancelling => redirecting to space_selectAll()....");
-				return "payment/cancel_page?imp_uid="+pay.getImp_uid();
+				return "payment/cancel_page.do?imp_uid="+pay.getImp_uid();
 			}
 		} else {
 			pay.setR_num(result_reservation.getR_num());
@@ -72,7 +72,7 @@ public class ReservationController {
 				logger.info("pay insert failed....");
 				int flag = reserveService.delete(result_reservation);
 				logger.info("reservation delete result: {}", flag);
-				return "payment/cancel_page?imp_uid="+pay.getImp_uid()+"&space_num="+result_reservation.getSpace_num();
+				return "payment/cancel_page.do?imp_uid="+pay.getImp_uid()+"&space_num="+result_reservation.getSpace_num();
 			} else {
 				logger.info("headding findByNum....");
 				String result = "reservation/findByNum.do?r_num="+result_reservation.getR_num();
@@ -130,33 +130,33 @@ public class ReservationController {
 		logger.info("Welcome cancel.do!");
 		logger.info("reservation: {}", reservation);
 		
-		int flag = reserveService.cancel(reservation);
-		logger.info("flag: {}", flag);
+		Reservation result = reserveService.cancel(reservation);
+		logger.info("flag: {}", result);
 		Timestamp current_time = new Timestamp(System.currentTimeMillis());
 		
-		if (flag == 0) {
+		if (result == null) {
 			return null;
 		} else {
 			Pay pay = new Pay();
-			pay.setR_num(reservation.getR_num());
-			pay.setReserve_date(reservation.getR_date());
+			pay.setR_num(result.getR_num());
+			pay.setReserve_date(result.getR_date());
 			
 			Pay pay1 = payService.calRefund(pay, current_time);
 			logger.info("{}", pay1);
 			
-			Pay result = payService.cancelByUid_partial(pay1);
+			Pay p_result = payService.cancelByUid_partial(pay1);
+			result.setAmount(p_result.getP_amount());
 			
-			Reservation cancel_result = new Reservation();
-			cancel_result.setAmount(result.getP_amount());
-			return cancel_result;
+			logger.info("result: {}", result);
+			
+			return result;
 		}
-		
 	}
 	
 	/**
 	 * request for user specific reservation page
 	 */
-	@RequestMapping(value = {"reservation/findByNum.do"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/reservation/findByNum.do"}, method = RequestMethod.GET)
 	public String findByNum(Reservation reservation, Model model) {
 		logger.info("Welcome findByNum.do!");
 		logger.info("{}", reservation);
@@ -171,7 +171,7 @@ public class ReservationController {
 	/**
 	 * request for user specific reservation page
 	 */
-	@RequestMapping(value = {"reservation/findByName.do"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/reservation/findByName.do"}, method = RequestMethod.GET)
 	public String findByName(Reservation reservation, Model model) {
 		logger.info("Welcome findByName.do!");
 		reservation.setName((String)session.getAttribute("user_name"));
@@ -185,7 +185,7 @@ public class ReservationController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = {"reservation/findByStatus.do"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/reservation/findByStatus.do"}, method = RequestMethod.GET)
 	public List<Reservation> findByStatus(Reservation reservation) {
 		logger.info("Welcome findByStatus.do!");
 		reservation.setName((String)session.getAttribute("user_name"));
@@ -194,7 +194,7 @@ public class ReservationController {
 		List<Reservation> result = reserveService.findReservationByName(reservation);
 		logger.info("reservation_list: {}", result);
 		
-		return null;
+		return result;
 	}
 	
 }

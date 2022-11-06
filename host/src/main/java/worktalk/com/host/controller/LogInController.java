@@ -40,7 +40,7 @@ public class LogInController {
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public String join() {
 		logger.info("Welcome join.do!");
-		return "join/login";
+		return "login/login";
 	}
 	
 	/**
@@ -49,30 +49,23 @@ public class LogInController {
 	 * if fails => redirecting to login page
 	 */
 	
-	@RequestMapping(value = "/loginOK.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/loginOK.do", method = RequestMethod.POST)
 	public String loginOK(Host host, HttpServletRequest request) {
 		logger.info("Welcome loginOK.do!");
 		
 		logger.info("host: {}", host);
 		
-		host.setEmail("host");
-		host.setPw("1234");
-		
 		Host host1 = loginService.login(host);
 		
 		if (host1 == null) {
 			logger.info("longin failed....");
-			return "redirect:join/login";
+			return "redirect:login.do";
 		} else {
 			if (host1.getRole() == 1) {
 				logger.info("redirecting to host page....");
 				session.setAttribute("host_name", host1.getName());
 				logger.info("host_name: {}", session.getAttribute("host_name"));
-				if (request.getHeader("Refer") == null) {
-					return "redirect:/";
-				} else {
-					return "redirect:" + request.getHeader("Referer");
-				}
+				return "redirect:/";
 			} else {
 				logger.info("redirecting to master page....");
 				session.setAttribute("master_name", host1.getName());

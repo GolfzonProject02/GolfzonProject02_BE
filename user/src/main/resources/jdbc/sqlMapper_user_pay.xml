@@ -6,35 +6,6 @@
 	<insert id="SQL_PAY_INSERT" parameterType="worktalk.com.user.domain.Pay">
 		INSERT INTO PAYMENT(P_NUM, UUID, R_NUM, P_STATUS, AMOUNT, NAME, P_DATE) VALUES(SEQ_PAYMENT.NEXTVAL, #{imp_uid}, #{r_num}, #{p_status}, #{p_amount},#{p_name},#{p_date})
 	</insert>
-	
-<!-- 	<update id="SQL_UPDATE" parameterType="worktalk.com.user.domain.Pay"> -->
-<!-- 		UPDATE MEMBER set  -->
-<!-- 			<if test="name != null"> -->
-<!-- 				NAME=#{name} -->
-<!-- 			</if> -->
-<!-- 			<if test="tel != null"> -->
-<!-- 				TEL=#{tel} -->
-<!-- 			</if> -->
-<!-- 			<if test="pw != null"> -->
-<!-- 				PW=#{pw} -->
-<!-- 			</if> -->
-<!-- 			<if test="imgname != null"> -->
-<!-- 				IMGNAME=#{imgname} -->
-<!-- 			</if> -->
-<!-- 			WHERE NUM = #{num} -->
-<!-- 	</update> -->
-	
-<!-- 	<delete id="SQL_DELETE" parameterType="worktalk.com.user.domain.Pay"> -->
-<!-- 		DELETE FROM MEMBER WHERE NUM=#{num} -->
-<!-- 	</delete> -->
-	
-<!-- 	<select id="SQL_LOG_IN" parameterType="worktalk.com.user.domain.Pay" resultType="worktalk.com.user.domain.Pay"> -->
-<!-- 		SELECT * FROM MEMBER WHERE EMAIL=#{email} and PW=#{pw} and ROLE = 0 -->
-<!-- 	</select> -->
-	
-<!-- 	<select id="SQL_SELECT_ONE" parameterType="worktalk.com.user.domain.Pay" resultType="worktalk.com.user.domain.Pay"> -->
-<!-- 		SELECT * FROM MEMBER WHERE NUM=#{num} -->
-<!-- 	</select> -->
 
 	<select id="SQL_PAY_FIND_BY_NAME" parameterType="worktalk.com.user.domain.Pay" resultType="worktalk.com.user.domain.Pay">
 		select * from payment where name = #{p_name} order by p_date desc
@@ -45,11 +16,11 @@
 	</select>
 	
 	<select id="SQL_PAY_HISTORY_BY_NAME" parameterType="worktalk.com.user.domain.Pay" resultType="worktalk.com.user.domain.Pay">
-		select p_num, r.name, uuid as imp_uid, to_char(r_date, 'yyyy-MM-dd HH:mm:ss') reserve_date , s.space_name, ro.room_name, p.p_status, r.status as reserve_status, p.amount, to_char(p_date, 'yyyy-MM-dd HH:mm:ss') p_date from reservation r join room ro on r.room_num = ro.room_num join space s on s.space_num = ro.space_num join payment p on r.r_num = p.r_num where r.name = #{p_name} by p_date desc
+		select p_num, r.name, uuid as imp_uid, to_char(r_date, 'YYYY-MM-DD HH24:MI:SS') reserve_date , s.space_name, ro.room_name, p.p_status, r.status as reserve_status, p.amount, to_char(p_date, 'YYYY-MM-DD HH24:MI:SS') p_date from reservation r join room ro on r.room_num = ro.room_num join space s on s.space_num = ro.space_num join payment p on r.r_num = p.r_num where r.name = #{p_name} order by p_date desc
 	</select>
 	
 	<select id="SQL_PAY_DATE_UID_BY_RNUM" parameterType="worktalk.com.user.domain.Pay" resultType="worktalk.com.user.domain.Pay">
-		select p_num, r.name as p_name, uuid as imp_uid,p.R_NUM, r.NAME, to_char(r_date, 'yyyy-MM-dd HH:mm:ss') reserve_date, to_char(r_start, 'yyyy-MM-dd HH:mm:ss') checkin_date, p.p_status, r.amount as p_amount from reservation r join payment p on r.r_num = p.r_num where r.r_num = #{r_num}
+		select p_num, r.name as p_name, uuid as imp_uid,p.R_NUM, r.NAME, to_char(r_date, 'YYYY-MM-DD HH24:MI:SS') reserve_date, to_char(r_start, 'YYYY-MM-DD HH24:MI:SS') checkin_date, p.p_status, r.amount as p_amount from reservation r join payment p on r.r_num = p.r_num where r.r_num = #{r_num}
 	</select>
 	
 <!-- 	<select id="SQL_FIND_BY_MAIL" parameterType="worktalk.com.user.domain.Pay" resultType="worktalk.com.user.domain.Pay"> -->

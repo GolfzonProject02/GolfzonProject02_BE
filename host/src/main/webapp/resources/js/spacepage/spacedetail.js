@@ -1,3 +1,4 @@
+
 let today = new Date();
 let year = Number(today.getFullYear());
 let month = Number(today.getMonth());
@@ -21,6 +22,7 @@ today = year+"-"+month+"-"+date;
 today_time = year+"-"+month+"-"+date+" "+hours+":"+minutes;
 console.log("today : "+today);
 console.log("today_time : "+today_time);
+
 
 // menu Open Close 함수
 function menutabOpen() {
@@ -330,9 +332,6 @@ $('.rv_host_delelte').click(function(){
 
 
 
-
-
-
 // kakaomap
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = { 
@@ -380,4 +379,6 @@ function getInfo() {
 }
 // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 var zoomControl = new kakao.maps.ZoomControl();
+
 map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
