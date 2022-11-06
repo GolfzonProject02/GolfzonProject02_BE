@@ -45,7 +45,7 @@ public class HostProfileController {
 		model.addAttribute("Host_profile", host1);
 		
 		
-		return "home";
+		return "mypage/profill";
 	}
 	
 //	/**

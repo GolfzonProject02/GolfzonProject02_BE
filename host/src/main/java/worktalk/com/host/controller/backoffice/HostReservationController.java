@@ -51,13 +51,13 @@ public class HostReservationController {
 		
 		logger.info("{}", reservation);
 		
-		List<Reservation> reservation_list =  reserveService.findReservationByName(reservation);
-		logger.info("reservation_list : {}",reservation_list);
-		logger.info("reservation_list.size : {}",reservation_list.size());
+		List<Reservation> host_reservation_list =  reserveService.findReservationByName(reservation);
+		logger.info("host_reservation_list : {}", host_reservation_list);
+		logger.info("host_reservation_list.size : {}",host_reservation_list.size());
 		
-		model.addAttribute("reservation_list", reservation_list);
+		model.addAttribute("host_reservation_list", host_reservation_list);
 		
-		return "home";
+		return "reservation/reservationList";
 	}
 	
 	@RequestMapping(value = "/backoffice/reservation/findByStatus.do", method = RequestMethod.GET)
@@ -91,14 +91,14 @@ public class HostReservationController {
 	}
 	
 	
-	@RequestMapping(value = "/backoffice/reservation/cancel.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/backoffice/reservation/cancel.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Reservation cancel(Reservation reservation) throws IamportResponseException, IOException {
 		logger.info("Welcome cancel!");
-		logger.info("{}", reservation);
+		logger.info("reservation : {}", reservation);
 		
 		Reservation cancel_result = reserveService.cancel(reservation);
-		logger.info("{}", cancel_result);
+		logger.info("cancel_result : {}", cancel_result);
 		
 		if (cancel_result == null) {
 			return null;
@@ -107,7 +107,6 @@ public class HostReservationController {
 			pay.setR_num(reservation.getR_num());
 			payService.cancelByUid(pay);
 		}
-		
 		return cancel_result;
 	}
 	
